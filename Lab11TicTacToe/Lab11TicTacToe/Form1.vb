@@ -1,137 +1,71 @@
 ﻿Public Class frmTIcTac
-    'Private intRand As Integer = 1
-    Private intSet As Integer = 0
+
+    Dim game(2, 2) As Integer
+    Const intMAX_ROW As Integer = 2
+    Const intMAX_COL As Integer = 2
+    Dim rand As New Random
+    Dim intRow As Integer
+    Dim intCol As Integer
 
     Private Sub btnNewGame_Click(sender As Object, e As EventArgs) Handles btnNewGame.Click
-        btnPlay1.Text = ""
-        btnPlay1.Enabled = True
-        btnPlay2.Text = ""
-        btnPlay2.Enabled = True
-        btnPlay3.Text = ""
-        btnPlay3.Enabled = True
-        btnPlay4.Text = ""
-        btnPlay4.Enabled = True
-        btnPlay5.Text = ""
-        btnPlay5.Enabled = True
-        btnPlay6.Text = ""
-        btnPlay6.Enabled = True
-        btnPlay7.Text = ""
-        btnPlay7.Enabled = True
-        btnPlay8.Text = ""
-        btnPlay8.Enabled = True
-        btnPlay9.Text = ""
-        btnPlay9.Enabled = True
-        lblWin.Text = ""
 
-        intSet = 0
-    End Sub
+        'Randomly fill array  1
+        For intRow As Integer = 0 To 2
+            For intCol As Integer = 0 To 2
+                Dim n As Integer = rand.Next(3)
+                game(intRow, intCol) = n
+            Next
+        Next
 
-    Private Sub frmTIcTac_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        btnPlay1.Text = ""
-        btnPlay1.Enabled = True
-        btnPlay2.Text = ""
-        btnPlay2.Enabled = True
-        btnPlay3.Text = ""
-        btnPlay3.Enabled = True
-        btnPlay4.Text = ""
-        btnPlay4.Enabled = True
-        btnPlay5.Text = ""
-        btnPlay5.Enabled = True
-        btnPlay6.Text = ""
-        btnPlay6.Enabled = True
-        btnPlay7.Text = ""
-        btnPlay7.Enabled = True
-        btnPlay8.Text = ""
-        btnPlay8.Enabled = True
-        btnPlay9.Text = ""
-        btnPlay9.Enabled = True
-
-        intSet = 0
-    End Sub
-
-    Sub ComputerPlay()
-        Dim objRandon As New Random
-        Dim intRandom As Integer
-
-        intRandom = Integer.Parse(objRandon.Next(1, 10))
-
-        If intRandom = 1 And btnPlay1.Enabled Then
+        'Determine if an X or O will be the text by the random value placed in the subscript.
+        If game(0, 0) = 1 Then
+            btnPlay1.Text = "X"
+        Else
             btnPlay1.Text = "O"
-            btnPlay1.Enabled = False
-            Exit Sub
         End If
-
-        If intRandom = 2 And btnPlay2.Enabled Then
+        If game(0, 1) = 1 Then
+            btnPlay2.Text = "X"
+        Else
             btnPlay2.Text = "O"
-            btnPlay2.Enabled = False
-            Exit Sub
         End If
-
-        If intRandom = 3 And btnPlay3.Enabled Then
+        If game(0, 2) = 1 Then
+            btnPlay3.Text = "X"
+        Else
             btnPlay3.Text = "O"
-            btnPlay3.Enabled = False
-            Exit Sub
         End If
-
-        If intRandom = 4 And btnPlay4.Enabled Then
+        If game(1, 0) = 1 Then
+            btnPlay4.Text = "X"
+        Else
             btnPlay4.Text = "O"
-            btnPlay4.Enabled = False
-            Exit Sub
         End If
-
-        If intRandom = 5 And btnPlay5.Enabled Then
+        If game(1, 1) = 1 Then
+            btnPlay5.Text = "X"
+        Else
             btnPlay5.Text = "O"
-            btnPlay5.Enabled = False
-            Exit Sub
         End If
-
-        If intRandom = 6 And btnPlay6.Enabled Then
+        If game(1, 2) = 1 Then
+            btnPlay6.Text = "X"
+        Else
             btnPlay6.Text = "O"
-            btnPlay6.Enabled = False
-            Exit Sub
         End If
-
-        If intRandom = 7 And btnPlay7.Enabled Then
+        If game(2, 0) = 1 Then
+            btnPlay7.Text = "X"
+        Else
             btnPlay7.Text = "O"
-            btnPlay7.Enabled = False
-            Exit Sub
         End If
-
-        If intRandom = 8 And btnPlay8.Enabled Then
+        If game(2, 1) = 1 Then
+            btnPlay8.Text = "X"
+        Else
             btnPlay8.Text = "O"
-            btnPlay8.Enabled = False
-            Exit Sub
         End If
-
-        If intRandom = 9 And btnPlay9.Enabled Then
+        If game(2, 2) = 1 Then
+            btnPlay9.Text = "X"
+        Else
             btnPlay9.Text = "O"
-            btnPlay9.Enabled = False
-            Exit Sub
         End If
 
-        'ComputerPlay()
 
-    End Sub
-
-    Private Sub ClickButtons(sender As Object, e As EventArgs) Handles btnPlay1.Click, btnPlay2.Click, btnPlay3.Click, btnPlay4.Click, btnPlay5.Click, btnPlay6.Click, btnPlay7.Click, btnPlay8.Click, btnPlay8.Click, btnPlay9.Click
-
-        'You play
-        sender.text = "X"
-        sender.enabled = False
-        intSet += 1
-        CheckWinner()
-
-        'Computer plays
-        ComputerPlay()
-        intSet += 1
-        CheckWinner()
-
-    End Sub
-
-    Sub CheckWinner()
-        If intSet >= 9 Then
-            lblWin.Text = "Nobody is winner"
-        ElseIf btnPlay1.Text = "O" And btnPlay2.Text = "O" And btnPlay3.Text = "O" _
+        If btnPlay1.Text = "O" And btnPlay2.Text = "O" And btnPlay3.Text = "O" _
             Or btnPlay4.Text = "O" And btnPlay5.Text = "O" And btnPlay6.Text = "O" _
             Or btnPlay7.Text = "O" And btnPlay8.Text = "O" And btnPlay9.Text = "O" _
             Or btnPlay1.Text = "O" And btnPlay4.Text = "O" And btnPlay7.Text = "O" _
@@ -141,7 +75,7 @@
             Or btnPlay1.Text = "O" And btnPlay2.Text = "O" And btnPlay3.Text = "O" _
             Or btnPlay7.Text = "O" And btnPlay5.Text = "O" And btnPlay3.Text = "O" Then
 
-            lblWin.Text = "Computer winner!!"
+            lblWin.Text = "O is winner"
         ElseIf btnPlay1.Text = "X" And btnPlay2.Text = "X" And btnPlay3.Text = "X" _
             Or btnPlay4.Text = "X" And btnPlay5.Text = "X" And btnPlay6.Text = "X" _
             Or btnPlay7.Text = "X" And btnPlay8.Text = "X" And btnPlay9.Text = "X" _
@@ -152,8 +86,12 @@
             Or btnPlay1.Text = "X" And btnPlay2.Text = "X" And btnPlay3.Text = "X" _
             Or btnPlay7.Text = "X" And btnPlay5.Text = "X" And btnPlay3.Text = "X" Then
 
-            lblWin.Text = "You winner!!"
+            lblWin.Text = "X is winner!!"
+        Else
+            lblWin.Text = "Nobody is winner!!"
         End If
+
+
     End Sub
 
     Private Sub btnExit_Click(sender As Object, e As EventArgs) Handles btnExit.Click
